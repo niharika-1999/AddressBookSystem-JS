@@ -8,6 +8,19 @@ let addressBook = [];
 let createContactAddressBook = (() => 
 {
     let firstName = prompt("First name: ");
+    let checkDuplicate = addressBook.find((contact) => 
+    {
+        if (contact.firstName == firstName) 
+        {
+          return true;
+        }
+    });
+    if (checkDuplicate) 
+    {
+        console.log("This first name already exists.");
+        createContactAddressBook();
+        return;
+    }
     let lastName = prompt("Last name: ");
     let address = prompt("Address: ");
     let city = prompt("City: ");
