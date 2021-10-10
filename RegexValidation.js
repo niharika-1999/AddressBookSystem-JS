@@ -1,3 +1,4 @@
+
 let checkFirstName = (firstName) => {
     let regex = RegExp("^[A-Z][a-zA-Z]{2,}");
     if (regex.test(firstName))
