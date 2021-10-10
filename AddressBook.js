@@ -182,13 +182,28 @@ let deleteContact = (name) => {
       if (addressBook[i].firstName == name) 
       {
         flag = 0;
-        //Splice used to delete contact
         addressBook.splice(i, 1); 
         break;
       }
     }
     if (flag == 1) 
-        console.log("Sorry, Contact not available in addressBook.");
+        console.log("Contact not available in addressBook.");
+};
+
+//To search contacts based on city or state
+let searchByCityState = (place) => {
+    let newArray = addressBook;
+    newArray.filter( () =>
+    {
+        addressBook.find((contact) => 
+        {
+            if (contact.city == place || contact.state == place) 
+            {
+                return true;
+            }
+      });
+    });
+    console.log("Result:" + JSON.stringify(filteredArray));
 };
   
 
@@ -197,7 +212,7 @@ function addressBookMain()
 {
     while (flag == 1) 
     {
-        console.log(" 1) Add a Contact\n 2) Display Address Book\n 3) Edit Contact\n 4) Delete Contact\n 5) Count Contact\n");
+        console.log(" 1) Add a Contact\n 2) Display Address Book\n 3) Edit Contact\n 4) Delete Contact\n 5) Count Contact\n 6) Search Contact\n");
         let choice = prompt("Enter your choice: ");
         switch(parseInt(choice)) 
         {
@@ -226,6 +241,12 @@ function addressBookMain()
             case 5:
                 {
                     console.log("Number of contacts present in the Address Book is: " + addressBook.length);
+                    break;
+                }
+            case 6:
+                {
+                    let place = prompt("Enter City or State:");
+                    searchByCityState(place);
                     break;
                 }   
             default:
