@@ -191,20 +191,19 @@ let deleteContact = (name) => {
 };
 
 //To search contacts based on city or state
-let searchByCityState = (place) => {
-    let newArray = addressBook;
-    newArray.filter( () =>
+let searchByCityState = (place) =>
+{
+    let newArray = addressBookArray.filter(contact => contact.state == place || contact.city == place);
+    if (newArray.length == 0) 
     {
-        addressBook.find((contact) => 
-        {
-            if (contact.city == place || contact.state == place) 
-            {
-                return true;
-            }
-      });
-    });
-    console.log("Result:" + JSON.stringify(filteredArray));
-};
+      console.log("No contacts in this City/State.");
+    } 
+    else 
+    {
+      console.log("No. of contacts from this place: " + newArray.length);
+      console.log("Result:" + JSON.stringify(newArray));
+    }
+}; 
   
 
 let flag = 1;
@@ -212,7 +211,7 @@ function addressBookMain()
 {
     while (flag == 1) 
     {
-        console.log(" 1) Add a Contact\n 2) Display Address Book\n 3) Edit Contact\n 4) Delete Contact\n 5) Count Contact\n 6) Search Contact\n");
+        console.log(" 1) Add a Contact\n 2) Display Address Book\n 3) Edit Contact\n 4) Delete Contact\n 5) Count Contact\n 6) Search Contact By City or State\n");
         let choice = prompt("Enter your choice: ");
         switch(parseInt(choice)) 
         {
