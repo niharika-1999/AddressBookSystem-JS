@@ -53,12 +53,120 @@ let displayAddressBook = (() =>
     console.log(addressBook);
 });
 
+//To edit the Contact
+let editContact = (name) => 
+{
+    let flag = 0;
+    for (let i = 0; i < addressBook.length; i++) {
+      if (addressBook[i].firstName == name) {
+        flag = 1;
+        let repeat = 1;
+        while (repeat) {
+          console.log("1. FirstName\n2. LastName\n3. Address\n4. City\n5. State\n6. Zip Code\n7. Contact no.\n8. Email\n9. Exit");
+          let option = prompt("Enter an choice to edit: ");
+          switch (Number(option)) 
+          {
+            case 1:
+              let firstName = prompt("First name: ");
+              try {
+                validation.checkFirstName(firstName);
+                addressBook[i].firstName = firstName;
+              } catch (error) {
+                console.error(error);
+                editContact(name);
+              }
+              break;
+            case 2:
+              let lastName = prompt("Last name: ");
+              try {
+                validation.checkLastName(lastName);
+                addressBook[i].lastName = lastName;
+              } catch (error) {
+                console.error(error);
+                editContact(name);
+              }
+              break;
+            case 3:
+              let address = prompt("Address: ");
+              try {
+                validation.checkAddress(address);
+                addressBook[i].address = address;
+              } catch (error) {
+                console.error(error);
+                editContact(name);
+              }
+              break;
+            case 4:
+              let city = prompt("City: ");
+              try {
+                validation.checkCity(city);
+                addressBook[i].city = city;
+              } catch (error) {
+                console.error(error);
+                editContact(name);
+              }
+              break;
+            case 5:
+              let state = prompt("State: ");
+              try {
+                validation.checkState(state);
+                addressBook[i].state = state;
+              } catch (error) {
+                console.error(error);
+                editContact(name);
+              }
+              break;
+            case 6:
+              let pin = prompt("Zip Code: ");
+              try {
+                validation.checkZip(zip);
+                addressBook[i].zip = zip;
+              } catch (error) {
+                console.error(error);
+                editContact(name);
+              }
+              break;
+            case 7:
+              let phoneNumber = prompt("Phone Number: ");
+              try {
+                validation.checkPhone(phNumber);
+                addressBook[i].phoneNumber = phoneNumber;
+              } catch (error) {
+                console.error(error);
+                editContact(name);
+              }
+              break;
+            case 8:
+              let email = prompt("Email ID: ");
+              try {
+                validation.checkEmail(email);
+                addressBook[i].email = email;
+              } catch (error) {
+                console.error(error);
+                editContact(name);
+              }
+              break;
+            case 9:
+              repeat = 0;
+              break;
+            default:
+              console.log("Invalid.");
+              repeat = 0;
+              break;
+          }
+        }
+      }
+    }
+    if (flag == 0)
+      console.log("Contact not available in addressBook.");
+  };
+
 let flag = 1;
 function addressBookMain() 
 {
     while (flag == 1) 
     {
-        console.log(" 1) Add a Contact\n 2) Display Address Book");
+        console.log(" 1) Add a Contact\n 2) Display Address Book 3) Edit Contact");
         let choice = prompt("Enter your choice: ");
         switch(parseInt(choice)) 
         {
@@ -72,6 +180,13 @@ function addressBookMain()
                     displayAddressBook();
                     break;
                 }  
+             case 3:
+                {
+                    let name = prompt("Enter the name of the contact to be edited: ");
+                    editContact(name);
+                    break;
+                }
+                
             default:
                 {
                     console.log("Invalid option.");
