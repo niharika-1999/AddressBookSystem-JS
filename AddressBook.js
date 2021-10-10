@@ -203,7 +203,82 @@ let searchByCityState = (place) =>
       console.log("No. of contacts from this place: " + newArray.length);
       console.log("Result:" + JSON.stringify(newArray));
     }
-}; 
+};
+
+//To sort the contacts based on Name, City, State and PIN Code 
+let sortEntriesByNameCityStateZip = (() =>
+{
+    console.log("Sort:\n1. Name\n2. City\n3. State\n4. PIN Code");
+    let choice = prompt("Sort By:");
+    let first, second;
+    switch (Number(choice)) {
+        case 1:
+            addressBook.sort((a, b) => {
+                first = a.firstName.toLowerCase();
+                second = b.firstName.toLowerCase();
+                if (first < second)
+                {
+                    return -1;
+                }
+                if (first > second)
+                {
+                    return 1;
+                }
+                return 0;
+            });
+            break;
+        case 2:
+            addressBook.sort((a, b) => {
+                first = a.city.toLowerCase();
+                second = b.city.toLowerCase();
+                if (first < second) 
+                {
+                    return -1;
+                }
+                if (first > second) 
+                {
+                    return 1;
+                }
+                return 0;
+            });
+            break;
+        case 3:
+            addressBook.sort((a, b) => {
+                first = a.state.toLowerCase();
+                second = b.state.toLowerCase();
+                if (first < second) 
+                {
+                    return -1;
+                }
+                if (first > second) 
+                {
+                    return 1;
+                }
+                return 0;
+            });
+            break;
+        case 4:
+            addressBook.sort((a, b) => {
+                first = a.pin.toLowerCase();
+                second = b.pin.toLowerCase();
+                if (first < second) 
+                {
+                    return -1;
+                }
+                if (first > second) 
+                {
+                    return 1;
+                }
+                return 0;
+            });
+            break;
+        default:
+            console.log("Invalid option.");
+            break;
+    }
+    displayAddressBook();
+});
+
   
 
 let flag = 1;
@@ -211,7 +286,7 @@ function addressBookMain()
 {
     while (flag == 1) 
     {
-        console.log(" 1) Add a Contact\n 2) Display Address Book\n 3) Edit Contact\n 4) Delete Contact\n 5) Count Contact\n 6) Search Contact By City or State\n");
+        console.log(" 1) Add a Contact\n 2) Display Address Book\n 3) Edit Contact\n 4) Delete Contact\n 5) Count Contact\n 6) Search Contact By City or State\n 7)Sort Entries By Name,City,State and Zip\n");
         let choice = prompt("Enter your choice: ");
         switch(parseInt(choice)) 
         {
@@ -246,6 +321,12 @@ function addressBookMain()
                 {
                     let place = prompt("Enter City or State:");
                     searchByCityState(place);
+                    break;
+                }
+            case 7:
+                {
+                    console.log("Sorting the Address Book");
+                    sortEntriesByNameCityStateZip(); 
                     break;
                 }   
             default:
